@@ -1,0 +1,736 @@
+body {
+    background-color: #F4BF96;
+    font-family: 'Jost', sans-serif;
+  
+  }
+  
+  body.overflow-hidden {
+    /* disable scrolling only when overlay is open */
+    overflow: hidden;
+  }
+  
+  .head {
+    background-color: whitesmoke; /* Latar belakang putih */
+    padding: 20px; /* Atur padding sesuai kebutuhan */
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+  }
+  
+  .head .title {
+    flex: 1;
+    text-align: left;
+    margin-right: 20px;
+    cursor: pointer;
+    color : #CE5A67;
+  }
+  .title:hover {
+    color: #e7a06b;
+    transform: scale(0.9);
+    transition: transform 0.3s ease;
+  }
+  
+  .head .button{
+    padding: 10px 20px;
+    background-color: #CE5A67;
+    color: white;
+    border-radius: 5px;
+    cursor: pointer;
+    transition: background-color 0.3s, color 0.3s;
+  }
+  
+  .button-pandu:hover {
+    background-color: #fdd2b1;
+    color: #CE5A67;
+    transform: scale(0.9);
+    transition: transform 0.3s ease;
+  }
+  .button-add:hover {
+    background-color: #fdd2b1;
+    color: #CE5A67;
+    transform: scale(0.9);
+    transition: transform 0.3s ease;
+  }
+  
+  .button-pandu{
+    background-color: #CE5A67;
+    box-shadow: none;
+    border: none;
+    margin-right: 10px;
+  }
+  
+  /* header */
+  
+  .header{
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+  }
+  
+  .header .title {
+    font-weight: 600;
+    font-size: var(--font-size-24);
+    text-align: center;
+    width: 100%;
+  }
+  
+  
+  
+  /* radio buttons for view options */
+  .radio-buttons-container {
+    margin-top: var(--space-32);
+    padding: 10px;
+  }
+  
+  .radio-container {
+    width: 100px;
+    margin: 5px;
+    background-color: white;
+    border-radius: 10px;
+  }
+  
+  .radio-buttons-container .radio-container {
+    margin-right: 10px; /* Atur spasi antara tombol */
+  }
+  
+  .radio-buttons-container .radio-label {
+    background-color: white;
+    color : pink;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-weight: 500;
+    font-size: var(--font-size-14);
+    cursor: pointer;
+    border: none;
+    padding: 8px 16px;
+    border-radius: 10px;
+  }
+  .radio-label:hover {
+    background-color: #FFF2D8;
+    transform: scale(1.1);
+    transition: transform 0.3s ease;
+  }
+  /*icon tambah*/
+  
+  .button-add-icon:hover {
+    transform: scale(1.2); /* Adjust the scale factor as needed */
+    transition: transform 0.3s ease;
+  }
+  
+  
+  .radio-input {
+    /* hide */
+    appearance: none;
+    /* remove from document flow */
+    position: absolute;
+  }
+  
+  /* direct sibling */
+  .radio-buttons-container .radio-input:checked + label[for="list"].radio-label {
+    background-color: #CE5A67;
+  }
+  
+  
+  
+  .radio-buttons-container .radio-input:checked + label[for="board"].radio-label {
+    background-color: #9FBB73;
+  }
+  
+  .radio-buttons-container .radio-input:checked + label[for="list"].radio-label span, .radio-buttons-container .radio-input:checked + label[for="board"].radio-label span{
+    color: white;
+  }
+  
+  /* lists view */
+  .list-view.hide {
+    display: none;
+  }
+  
+  .list-view .list-container {
+    margin-top: var(--space-32);
+    background-color: #FFF2D8;
+    border: 2px solid var(--black);
+    border-radius: var(--radius-8);
+  }
+  
+  .list-view .list-container.pink {
+    box-shadow: var(--pink-shadow);
+  }
+  
+  .list-view .list-container.blue {
+    box-shadow: var(--blue-shadow);
+  }
+  
+  .list-view .list-container.green {
+    box-shadow: var(--green-shadow);
+  }
+  
+  .list-header {
+    display: flex;
+    align-items: center;
+    gap: var(--space-8);
+  }
+  
+  .list-view .list-header {
+    padding: var(--space-16);
+    border-bottom: 2px solid var(--black);
+  }
+  
+  .list-header .text {
+    font-weight: 600;
+    font-size: var(--font-size-16);
+  }
+  
+  .list-view .tasks-list {
+    padding: var(--space-24) var(--space-16);
+  }
+  
+  .task-item .task-button {
+    width: 100%;
+    text-align: left;
+  }
+  
+  .list-view .task-item .task-button {
+    display: grid;
+    /* 3 equal columns */
+    grid-template-columns: repeat(3, 1fr);
+  }
+  
+  .list-view .task-item {
+    margin-top: var(--space-24);
+  }
+  
+  .list-view .task-item:hover {
+    background-color: rgb(173, 173, 173);
+    transition: 0.2s ease;
+    padding: 10px;
+    border-radius: 10px;
+  }
+  
+  .list-view .task-item:first-child {
+    margin-top: 0;
+  }
+  
+  .task-item .task-name {
+    font-weight: 600;
+    font-size: var(--font-size-14);
+  }
+  
+  .list-view .task-item .task-name {
+    /* expands two columns */
+    grid-column: 1 / 3;
+  }
+  
+  .task-item .task-due-date {
+    font-size: var(--font-size-14);
+    color: var(--dark-gray);
+    margin-top: var(--space-4);
+  }
+  
+  .list-view .task-item .task-due-date {
+    grid-column: 1 / 3;
+    /* second row */
+    grid-row: 2 / 3;
+  }
+  
+  .task-item .arrow-icon {
+    transform: rotate(180deg);
+  }
+  
+  .list-view .task-item .arrow-icon {
+    /* last column */
+    grid-column: 3 / 4;
+    /* expands two rows */
+    grid-row: 1 / 3;
+    /* full height */
+    height: 100%;
+    /* vertical center */
+    display: flex;
+    align-items: center;
+  }
+  
+  /* board view */
+  .board-view {
+    margin-top: var(--space-32);
+      /* enable horizontal scroll when needed */
+      overflow-x: auto;
+      padding: 0 var(--space-8) var(--space-8);
+      display: grid;
+      grid-template-columns: repeat(3, minmax(266px, 1fr));
+      column-gap: var(--space-24);
+      /* hide scrollbars in Firefox */
+      scrollbar-width: none;
+  }
+  
+  .board-view.hide {
+    display: none;
+  }
+  
+  /* hide scrollbars without impacting scrolling */
+  /* Chrome, Safari, Opera, and other WebKit-based browsers */
+  .board-view::-webkit-scrollbar {
+    display: none;
+  }
+  
+  .board-view .task-item {
+    margin-top: var(--space-16);
+    background-color:#FFF2D8;
+    border: 2px solid var(--black);
+    border-radius: var(--radius-8);
+  }
+  
+  .board-view .task-item:hover {
+    transform: translateX(10px); /* Geser 10px ke kanan saat dihover */
+    transition: 0.2s ease;
+  }
+  
+  .board-view .tasks-list.pink .task-item {
+    box-shadow: var(--pink-shadow);
+  }
+  
+  .board-view .tasks-list.blue .task-item {
+    box-shadow: var(--blue-shadow);
+  }
+  
+  .board-view .tasks-list.green .task-item {
+    box-shadow: var(--green-shadow);
+  }
+  
+  .board-view .task-item .task-button {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: var(--space-24) var(--space-16);
+  }
+  
+  /* overlay */
+  .overlay {
+    width: 100%;
+    height: 100%;
+    background-color: var(--beige);
+    position: fixed;
+    left: 0;
+    top: 0;
+    z-index: 1000;
+    padding: var(--space-48) var(--space-32) var(--space-32);
+    display: grid;
+    place-items: center;
+    /* if content is longer than screen height, enable scrollbar */
+    overflow-y: auto;
+    box-shadow: black;
+  }
+  
+  .overlay.hide {
+    display: none;
+  }
+  
+  .open {
+    display: flex;
+  }
+  
+  .overlay-content {
+    border: 1px solid #d18c56;
+    border-radius: var(--radius-8);
+    padding: var(--space-32);
+    max-width: 500px;
+    min-width: 300px;
+    /* to position close button */
+    position: relative;
+    background-color: #F4BF96;
+    box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.1);
+  }
+  
+  /* Edit overlay */
+  .edit-task-overlay .close-button {
+    top: 20px; /* Sesuaikan dengan posisi vertikal yang diinginkan */
+    right: 20px; /* Sesuaikan dengan posisi horizontal yang diinginkan */
+    margin-left: 380px;
+  }
+  
+  /* Add overlay */
+  .set-task-overlay .close-button {
+    top: 20px; /* Sesuaikan dengan posisi vertikal yang diinginkan */
+    right: 20px; /* Sesuaikan dengan posisi horizontal yang diinginkan */
+    margin-left: 380px;
+  }
+  
+  
+  .view-task-overlay .overlay-content {
+    /* Membuat tata letak flexbox */
+    display: flex;
+    flex-direction: column;
+     /* Mengatur konten ke kiri */
+    gap: var(--space-16); /* Ruang antar elemen */
+  }
+  
+  .view-task-overlay .overlay-content .overlay-button {
+    /* Mengatur tombol-tombol ke kanan */
+    display: flex;
+    flex-direction: row;
+    justify-content: flex-end;
+    gap: var(--space-16);
+    margin-bottom: -50px;
+  }
+  
+  
+  .set-task-overlay, .edit-task-overlay, .view-task-overlay {
+    background-color: rgba(244, 191, 150, 0.7); /* Nilai alpha (0.8) menentukan tingkat transparansi */
+    /* Gaya atau styling tambahan */
+    backdrop-filter: blur(10px);
+    border: none;
+  }
+  
+  
+  .set-task-overlay .close-button {
+    background-color: #FFF2D8; /* Mengubah warna latar belakang */
+    /* Gaya atau styling tambahan */
+    border: none;
+    box-shadow: none;
+  }
+  
+  .set-task-overlay .close-button:hover {
+    background-color: #FFF2D8; /* Mengubah warna latar belakang */
+    /* Gaya atau styling tambahan */
+    border: none;
+    box-shadow: none;
+    background-color: #CE5A67;
+    transition: 0.2s ease;
+    transform: scale(0.9);
+    transition: transform 0.3s ease;
+  }
+  
+  
+  .edit-task-overlay .close-button:hover {
+    background-color: #CE5A67;
+    transition: 0.2s ease;
+    transform: scale(0.9);
+  }
+  
+  .edit-task-overlay .close-button, .edit-task-overlay .delete-button{
+    background-color: #FFF2D8; /* Mengubah warna latar belakang */
+    /* Gaya atau styling tambahan */
+    border: none;
+    box-shadow: none;
+  }
+  
+  .view-task-overlay .close-button,.view-task-overlay .edit-button, .view-task-overlay .delete-button {
+    background-color: #FFF2D8; /* Mengubah warna latar belakang */
+    /* Gaya atau styling tambahan */
+    border: none;
+    box-shadow: none;
+  }
+  
+  .view-task-overlay .close-button:hover{
+    background-color: #CE5A67;
+    transition: 0.2s ease;
+    transform: scale(0.9);
+  }
+  .view-task-overlay .edit-button:hover{
+    background-color: #9FBB73;
+    transition: 0.2s ease;
+    transform: scale(0.9);
+  }
+  .view-task-overlay .delete-button:hover{
+    background-color: #CE5A67;
+    transition: 0.2s ease;
+    transform: scale(0.9);
+  }
+  
+  .view-task-overlay p.value {
+    word-wrap: break-word;
+    background-color: #FFF2D8; 
+    padding: 10px; 
+    border-radius: 5px; 
+  }
+  
+  .cta-button {
+    margin-right: 50px;
+    margin-bottom: 10px;
+    background-color: white;
+    color: #CE5A67;
+    box-shadow: none;
+    border: none;
+    width: 200px;
+    margin-left: auto;
+    margin-right: auto;
+    display: block;
+    font-weight: 5000;
+  }
+  
+  .cta-button:hover {
+    background-color: #FFF2D8;
+    transition: 0.2s ease;
+    transform: scale(0.9);
+  }
+  
+  .button-add{
+    box-shadow: none;
+    border: none;
+    margin-right: 10px;
+  }
+  .button-add-icon{
+    box-shadow: none;
+    border: none;
+    margin-right: 10px;
+  }
+  
+  
+  
+  /* Opsional: Untuk memberikan jarak seimbang di sekitar tombol */
+  .text-center {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-wrap: wrap;
+  }
+  
+  .set-task-overlay .header {
+    font-weight: 600;
+    font-size: var(--font-size-24);
+    border: none;
+  }
+  
+  .view-task-overlay .header {
+    font-weight: 600;
+    font-size: var(--font-size-16);
+    margin-top: var(--space-16);
+  }
+  
+  .view-task-overlay .header.no-margin {
+    margin-top: 0;
+  }
+  
+  .view-task-overlay .header.min-width {
+    min-width: 90px;
+  }
+  
+  .view-task-overlay .value {
+    margin-top: 10px;
+    line-height: 20px;
+    position: relative;
+  }
+  
+  
+  .view-task-overlay .status-value {
+    display: flex;
+    align-items: center;
+    gap: var(--space-8);
+    background-color: var(--beige);
+    border: 2px solid var(--black);
+    border-radius: var(--radius-8);
+    padding: var(--space-8) var(--space-16);
+    height: var(--input-height);
+    border: none;
+    color: #9c673e;
+    margin-top: 20px;
+  }
+  
+  .flex h1{
+    margin-right: 0px;
+  }
+  
+  .view-task-overlay .control-buttons-container {
+    display: flex;
+    justify-content: flex-end;
+    gap: var(--space-16);
+    margin-top: var(--space-32);
+  }
+  
+  
+  .view-task-overlay .control-buttons-container button {
+    flex-shrink: 0; /* Mencegah perubahan ukuran */
+  }
+  
+  
+  
+  .label{
+    margin-top: 40px;
+  }
+  .label, .secondary-label{
+    color: #9c673e;
+    font-weight: 5000;
+  }
+  
+  
+  
+  input [type="text"]{
+    width: 420px;
+  }
+  
+  .input {
+    background-color: #FFF2D8;
+    border: none;
+  }
+  
+  .divided-inputs-container {
+    display: flex; /* Menggunakan flexbox */
+    justify-content: center; /* Memposisikan secara horizontal di tengah */
+    align-items: center; /* Memposisikan secara vertikal di tengah */
+  }
+  
+  .divided-inputs-container > div {
+    margin-right: 10px; /* Atur ruang antara label */
+  }
+  
+  .divided-inputs-container label{
+    display: flex; /* Menggunakan flexbox */
+    justify-content: center; /* Memposisikan secara horizontal di tengah */
+    align-items: center;
+  }
+  
+  .divided-inputs-container input {
+    width: 180px;
+  }
+  
+  
+  
+  .textarea-input {
+    background-color: #FFF2D8;
+    border: none;
+    width: 420px;
+    height: 100px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 10px;
+    resize: none;
+  }
+  
+  .textarea-container {
+    position: relative;
+    margin-top: 20px;
+  }
+  
+  .placeholder-text {
+    position: absolute;
+    top: 12px;
+    left: 15px;
+    pointer-events: none;
+    transition: top 0.3s, font-size 0.3s;
+    font-size: 16px;
+    color: rgba(0, 0, 0, 0.5);
+  }
+  
+  .textarea-input:focus + .placeholder-text,
+  .textarea-input:not(:placeholder-shown) + .placeholder-text,
+  .textarea-input:valid + .placeholder-text,
+  .textarea-input:not(:focus):valid + .placeholder-text {
+    top: 0;
+    font-size: 9px;
+    color: rgb(159, 157, 157);
+  }
+  
+  
+  
+  
+  
+  
+  
+  .notification {
+    /* relative to body */
+    position: fixed; /* fixed even on scroll */
+    /* hide */
+    top: -100%;
+    left: 50%;
+    transform: translateX(-50%);
+    display: flex;
+    align-items: center;
+    gap: var(--space-8);
+    padding: var(--space-32);
+    height: 80px;
+    font-weight: 600;
+    font-size: var(--font-size-14);
+    width: 100%;
+    max-width: 375px;
+    transition-property: top;
+    transition-duration: 0.5s;
+  }
+  
+  .notification.show {
+    top: 0;
+  }
+  
+  /* media queries */
+  @media (min-width: 768px) {
+    .list-view .task-item .task-button {
+      /* align items to top in firefox */
+      align-items: center;
+      display: grid;
+      grid-template-columns: 1fr auto;
+    }
+  
+    .list-view .task-item .task-name {
+      /* expands first column */
+      grid-column: 1 / 2;
+    }
+  
+    .list-view .task-item .task-due-date {
+      /* expands second column */
+      grid-column: span 1 / -1;
+      /* back to default */
+      grid-row: auto / auto; /* start / end */
+      margin-top: 0;
+      margin-bottom: 0;
+      text-align: center;
+    }
+  
+  
+    .list-view .task-item .arrow-icon {
+      /* back to default */
+      grid-row: auto / auto;
+      height: auto;
+      justify-self: right;
+      margin-left: 20px;
+    }
+    
+  
+    .custom-select {
+      position: relative;
+      display: inline-block;
+    }
+  
+    .custom-select select {
+      display: none;
+    }
+  
+    .custom-dropdown {
+      background-color: white;
+      border: 1px solid #ccc;
+      display: inline-block;
+      cursor: pointer;
+      padding: 10px;
+      min-width: 150px;
+    }
+  
+    .custom-dropdown ul {
+      list-style: none;
+      padding: 0;
+    }
+  
+    .custom-dropdown li {
+      padding: 5px;
+    }
+  
+  }
+  
+  @media (max-width: 767px) {
+    .board-view {
+      grid-template-columns: 1fr; /* Mengubah menjadi satu kolom pada layar kecil */
+      gap: var(--space-16); /* Atur ruang antara item */
+      padding: 0 var(--space-8); /* Sesuaikan padding agar lebih sesuai */
+    }
+  
+    .board-view .tasks-list {
+      margin-bottom: var(--space-24); /* Tambahkan margin bawah untuk memisahkan list */
+    }
+  }
+  
+  /* Tambahan */
+  @media (min-width: 768px) and (max-width: 1023px) {
+    .board-view {
+      grid-template-columns: repeat(2, minmax(200px, 1fr)); /* Dua kolom pada layar menengah */
+    }
+  }
+  
+  
+  

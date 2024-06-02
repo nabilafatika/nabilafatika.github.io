@@ -1,0 +1,407 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <!-- link drive.js (trus ke paling bawah)-->
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/driver.js@1.0.1/dist/driver.css"/>
+
+    <link rel="icon" href="../img/logoCatat!.ico" type="image/x-icon">
+    <title>CATAT! - Dashboard</title>
+    <!-- google font: Inter -->
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link href="https://fonts.googleapis.com/css2?family=Jost:wght@400;700&display=swap" rel="stylesheet">
+
+    <!-- main css -->
+    <link rel="stylesheet" href="../css/main.css" />
+    <link rel="stylesheet" href="../css/dashboard.css" />
+  </head>
+  <body>
+    <div class="head">
+      <h1 class="title" id="logo">CATAT!</h1>
+      <button
+      id="pandu"
+      class="button button-pandu">Panduan CATAT!
+    </button>
+      <button
+      id="add-task-cta"
+      class="button button-add">Tambahkan Tugas
+    </button>
+   
+    </div>
+    <!-- Because body has height 100%, we need a container to wrap the individual 
+    elements. The purpose is to add top & bottom padding -->
+    <div class="content-container">
+      <!-- Add task notification -->
+      <div id="add-task-notification" class="notification green-background">
+        <iconify-icon
+          icon="mdi:check-circle-outline"
+          style="color: black"
+          width="24"
+          height="24"
+        ></iconify-icon>
+        <p>Tugas ditambahkan</p>
+        <!-- delete notification -->
+      </div>
+      <div id="delete-task-notification" class="notification pink-background">
+        <iconify-icon
+          icon="mdi:check-circle-outline"
+          style="color: black"
+          width="24"
+          height="24"
+        ></iconify-icon>
+        <p>Tugas dihapus</p>
+      </div>
+      <div id="error-task-notification" class="notification pink-background">
+        <iconify-icon
+          icon="mdi:check-circle-outline"
+          style="color: black"
+          width="24"
+          height="24"
+        ></iconify-icon>
+        <p>Terjadi kesalahan saat menambahkan tugas</p>
+      </div>
+      <div id="done-task-notification" class="notification green-background">
+      <iconify-icon
+        icon="mdi:check-circle-outline"
+        style="color: black"
+        width="24"
+        height="24"
+      ></iconify-icon>
+      <p>Tugas selesai</p>
+    </div>
+      <div id="todo-task-notification" class="notification pink-background">
+      <iconify-icon
+        icon="mdi:check-circle-outline"
+        style="color: black"
+        width="24"
+        height="24"
+      ></iconify-icon>
+      <p>Tugas dikembalikan</p>
+    </div>
+      <!-- header -->
+      <div class="max-width-container">
+        <div class="header flex items-center justify-between">
+          <div class="buttons-container">
+            <button class="sign-out-cta"></button>
+          </div>
+        </div>
+      </div>
+      <!-- radio buttons -->
+      <div class="radio-buttons-container">
+        <div class="max-width-container flex">
+          <button id="add-task-cta-icon" class="button button-add-icon">
+          <iconify-icon
+            icon="ep:circle-plus-filled"
+            style="color: #FFFFFF; margin-right: 5px;"
+            width="40"
+            height="40"></iconify-icon>
+          </button>
+        
+          <div class="radio-container">
+            <input
+              type="radio"
+              id="list"
+              name="view-option"
+              value="list"
+              class="radio-input"
+              checked
+            />
+            <label for="list" id="bagianTugas" class="radio-label" style="font-size: 16px; font-weight: bold; color: rgb(235, 139, 155);">
+              <!-- list-bulleted -->
+              <span>Tugas</span>
+            </label>
+          </div>
+          <div class="radio-container">
+            <input
+              type="radio"
+              id="board"
+              name="view-option"
+              value="board"
+              class="radio-input"
+            />
+            <label for="board" id="bagianSelesai" class="radio-label" style="font-size: 16px; font-weight: bold; color: #9FBB73;">
+              <!-- grid -->
+              <span>Selesai</span>
+            </label>
+          </div>
+        </div>
+      </div>
+      <!-- tasks -->
+      <div class="max-width-container">
+        <!-- list view -->
+        <div id="list-view" class="list-view">
+          <div class="list-container pink">
+              <ul class="tasks-list" id="toDoTaskList">
+                  <!-- Existing "To do" task items go here -->
+              </ul>
+        </div>
+        </div>
+        </div>
+      </div>
+<div class="max-width-container">
+  <div id="board-view" class="board-view hide">
+    <!-- List 1 -->
+    <div>
+      <ul class="tasks-list green" id="doneTaskList1">
+        <!-- Existing Column 1 "Done" task items go here -->
+      </ul>
+    </div>
+    <!-- List 2 -->
+    <div>
+      <ul class="tasks-list green" id="doneTaskList2">
+        <!-- Existing Column 2 "Done" task items go here -->
+      </ul>
+    </div>
+    <!-- List 3 -->
+    <div>
+      <ul class="tasks-list green" id="doneTaskList3">
+        <!-- Existing Column 3 "Done" task items go here -->
+      </ul>
+    </div>
+  </div>
+</div>
+
+    <!-- add + update task -->
+    <div id="set-task-overlay" class="overlay set-task-overlay hide">
+      <div class="overlay-content pink-background">
+        <!-- close button -->
+        <button
+          class="button circle-button blue-background flex justify-center items-center close-button"
+        >
+          <iconify-icon
+            icon="material-symbols:close-rounded"
+            style="color: #F4BF96"
+            width="26"
+            height="26"
+          ></iconify-icon>
+        </button>
+        <form class="form" autocomplete="off"> 
+          <label for="name" class="label" style="font-size: 20px;">Judul</label>
+          <input
+            type="text" name="name" id="name" placeholder="Masukkan Judul Tugas atau Rencana" class="input"required/>
+          
+          
+            <label for="description" class="label" style="font-size: 20px;">Deskripsi</label>
+            <div class="textarea-container">
+              <textarea
+                name="description" 
+                id="taskDescription"
+                rows="8"
+                class="textarea-input white-background"
+                oninput="handleTextareaInput(this)"
+                required
+              ></textarea>
+              <div class="placeholder-text">Masukkan Deskripsi Tugas Disini</div>
+            </div>
+            
+
+
+          <h2 class="label" style="display:flex; align-items:  center; justify-content: center; font-size: 20px;">Tenggat Waktu</h2>
+          <div class="divided-inputs-container" >
+            <div>
+              <label for="due-date-time" class="secondary-label" style="font-size: 15px; font-weight: bold;" >Jam</label>
+              <input style="height: 55px"
+              type="time"
+              name="due-date-time"
+              id="due-date-time"
+              class="input"
+              required>
+            </div>
+            <div>
+              <label for="due-date-day" class="secondary-label" style="font-size: 15px; font-weight: bold;">Tanggal</label>
+              <input style="height: 55px"
+              type="date"
+              name="due-date-day"
+              id="due-date-day"
+              class="input"
+              />
+            </div>
+          </div>
+          <div class="text-center">
+            <button type="submit" class="button regular-button green-background cta-button" id="addTaskButton">
+              Tambah
+            </button>
+          </div>
+        </form>
+      </div>
+    </div>
+<!-- edit + update task -->
+<div id="edit-task-overlay" class="overlay edit-task-overlay hide">
+  <div class="overlay-content pink-background">
+    <!-- close button -->
+    <button
+      class="button circle-button blue-background flex justify-center items-center close-button"
+    >
+      <iconify-icon
+        icon="material-symbols:close-rounded"
+        style="color: #F4BF96"
+        width="26"
+        height="26"
+      ></iconify-icon>
+    </button>
+    <form class="form" autocomplete="off"> 
+      <label for="name" class="label">Name</label>
+      <input
+        type="text" name="name" id="name" class="input white-background" required/>
+     
+        <label for="description" class="label">Description</label>
+      <textarea
+        name="description" 
+        id="taskDescription"
+        rows="8"
+        class="textarea-input white-background"
+        required>
+      </textarea>
+
+
+      <h2 class="label">Due date</h2>
+      <div class="divided-inputs-container">
+        <div>
+          <label for="due-date-time" class="secondary-label">Jam</label>
+          <input style="height: 55px"
+          type="time"
+          name="due-date-time"
+          id="due-date-time"
+          class="input white-background"
+          required>
+        </div>
+        <div>
+          <label for="due-date-day" class="secondary-label">Tanggal</label>
+          <input style="height: 55px"
+          type="date"
+          name="due-date-day"
+          id="due-date-day"
+          class="input white-background"
+          />
+        </div>
+      </div>
+      <div class="text-center">
+        <button type="submit" class="button regular-button green-background cta-button" id="confirmTaskButton">
+          Confirm
+        </button>
+      </div>
+    </form>
+  </div>
+</div>
+    <!-- view task -->
+    <div id="view-task-overlay" class="overlay view-task-overlay hide">
+      <div class="overlay-content green-background">
+        <div class="overlay-button">
+          <!-- edit button -->
+          <button
+          class="button circle-button flex justify-center items-center edit-button" id="edit-task-cta">
+          <iconify-icon
+            icon="material-symbols:edit-rounded"
+            style="color: #F4BF96"
+            width="24"
+            height="24"
+          ></iconify-icon>
+        </button>
+        <!-- delete button -->
+        <button
+          id="delete-task-cta"
+          class="button circle-button delete-button">
+          <iconify-icon
+            icon="ic:round-delete"
+            style="color: #F4BF96"
+            width="25"
+            height="25"
+          ></iconify-icon>
+        </button>
+          <!-- close button -->
+          <button
+            class="button circle-button close-button"
+          >
+            <iconify-icon
+            icon="material-symbols:close-rounded"
+            style="color: #F4BF96"
+            width="35"
+            height="35"
+          ></iconify-icon>
+          </button>
+        </div>
+        <h1 class="label" style="font-size: 25px; margin-left: 20px; margin-right: 20px;">Judul</h1>
+        <p class="value"id="taskNameElement" style="color: rgb(80, 80, 80); font-size: 18px ;margin-left: 20px; margin-right: 20px"></p>
+        <h1 class="header" style="color: #9c673e; font-weight: 5000; font-size: 25px;margin-left: 20px; margin-right: 20px">Deskripsi</h1>
+        <p class="value" id="taskDescriptionElement" style="color: rgb(80, 80, 80); font-size: 18px; margin-left: 20px; margin-right: 20px"></p>
+          <h1 class="header min-width" style="color: #9c673e; font-weight: 5000; font-size: 25px; margin-left: 20px; margin-right: 20px ;margin-right: 20px">Tenggat Waktu</h1>
+          <p class="value" id="dueDateElement" style="color: rgb(80, 80, 80); font-size: 18px; margin-left: 20px; margin-right: 20px"></p>
+        <div class="flex items-center">
+          <h1 class="header min-width" style="color: #9c673e; font-weight: 5000; font-size: 20px; margin-left: 20px;">Status</h1>
+          <p class="value status-value" id = "waktu"  >
+            <span class="circle pink-background"></span><span>Tugas</span>
+          </p>
+        </div>
+        <div class="control-buttons-container">
+          <button class="button regular-button pink-background cta-button" style="color: #9FBB73"id="done-task-button" status-value="todo">
+            Tandai selesai
+          </button>
+        </div>
+      </div>
+    </div>
+        <!-- view done task -->
+        <div id="view-done-task-overlay" class="overlay view-task-overlay hide">
+          <div class="overlay-content green-background">
+            <div class="overlay-button">
+              <!-- delete button -->
+              <button
+                id="done-delete-task-cta"
+                class="button circle-button delete-button">
+                <iconify-icon
+                  icon="ic:round-delete"
+                  style="color: #F4BF96"
+                  width="24"
+                  height="24"
+                ></iconify-icon>
+              </button>
+            <!-- close button -->
+            <button
+              class="button circle-button close-button"
+            >
+              <iconify-icon
+                icon="material-symbols:close-rounded"
+                style="color: #F4BF96"
+                width="35"
+                height="35"
+              ></iconify-icon>
+            </button>
+          </div>
+            <h1 class="label" style="font-size: 25px; margin-left: 20px;">Judul</h1>
+            <p class="value"id="taskNameDone" style="font-size: 18px; margin-left: 20px;"></p>
+            <h1 class="header" style="color: #9c673e; font-weight: 5000; font-size: 25px;margin-left: 20px;">Deskripsi</h1>
+            <p class="value" id="taskDescriptionDone" style="font-size: 18px;margin-left: 20px;"></p>
+              <h1 class="header min-width" style="color: #9c673e; font-weight: 5000; font-size: 25px; margin-left: 20px;">Tenggat Waktu</h1>
+              <p class="value" id="dueDateDone" style="font-size: 18px; margin-left: 20px;"></p>
+            <div class="flex items-center">
+          <h1 class="header min-width" style="color: #9c673e; font-weight: 5000; font-size: 20px; margin-left: 20px;">Status</h1>
+              <p class="value status-value" id = "waktu" >
+                <span class="circle green-background"></span><span>Selesai</span>
+              </p>
+            </div>
+            <div class="control-buttons-container">
+              
+              <button class="button regular-button pink-background cta-button" id="todo-task-button" status-value="todo">
+                Belum selesai
+              </button>
+            </div>
+          </div>
+        </div>
+    </div>
+    <!-- import IconifyIcon web component -->
+    <script src="https://code.iconify.design/iconify-icon/1.0.5/iconify-icon.min.js"></script>
+    <!-- js -->
+    <script src="../js/main.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/uuid@8.3.2/dist/umd/uuidv4.min.js"></script>
+
+    <!-- driver.js -->
+    <script src="https://cdn.jsdelivr.net/npm/driver.js@1.0.1/dist/driver.js.iife.js"></script>
+    <!-- Menggunakan CDN -->
+
+  </body>
+</html>
+
+
+
